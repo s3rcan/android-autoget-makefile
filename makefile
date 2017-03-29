@@ -10,24 +10,25 @@ ANDROID_SDK_DOWNLOAD_LOCATION := https://dl.google.com/android/repository/tools_
 ANDROID_SDK_LOCATION := android-sdk
 
 ANDROID_NDK_VERSION := r10e
-ANDROID_NDK_ZIP := downloads/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.tar.bz2
+ANDROID_NDK_ZIP := downloads/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.zip
 ANDROID_NDK_DOWNLOAD_LOCATION := https://dl.google.com/android/repository/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.zip
 ANDROID_NDK_LOCATION := android-ndk
 
 define EXPECT_SCRIPT
-set timeout -1                                                  \n\
-                                                                \n\
-spawn $(ANDROID_SDK_LOCATION)/tools/android update sdk --no-ui  \n\
-                                                                \n\
-expect {                                                        \n\
-    \"\[y\\/n\]: \" {                                           \n\
-        send \"y\\\r\"                                          \n\
-        expect \"y\\\r\"                                        \n\
-        exp_continue                                            \n\
-    }                                                           \n\
-}                                                               \n\
+set timeout -1                                                   \n\
+                                                                 \n\
+spawn $(ANDROID_SDK_LOCATION)/tools/android update sdk -u -a -t  android-23,android-11,platform-tools,build-tools-25.0.2,addon-google_apis-google-23,extra-android-m2repository,extra-google-m2repository \n\
+expect {                                                         \n\
+    \"\[y\\/n\]: \" {                                            \n\
+        send \"y\\\r\"                                           \n\
+        expect \"y\\\r\"                                         \n\
+        exp_continue                                             \n\
+    }                                                            \n\
+}                                                                \n\
 
 endef
+
+install : install_tools extract_ndk
 
 install_tools : extract_sdk
 	echo "$(EXPECT_SCRIPT)" > tmp.exp
