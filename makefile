@@ -4,16 +4,15 @@
 #
 
 
+ANDROID_SDK_VERSION := r25.2.3
+ANDROID_SDK_ZIP := downloads/tools_$(ANDROID_SDK_VERSION)-linux.zip
+ANDROID_SDK_DOWNLOAD_LOCATION := https://dl.google.com/android/repository/tools_$(ANDROID_SDK_VERSION)-linux.zip
+ANDROID_SDK_LOCATION := android-sdk
 
-ANDROID_SDK_VERSION := r22.2.1
-ANDROID_SDK_TGZ := downloads/android-sdk_$(ANDROID_SDK_VERSION)-linux.tgz
-ANDROID_SDK_DOWNLOAD_LOCATION := http://dl.google.com/android/android-sdk_$(ANDROID_SDK_VERSION)-linux.tgz
-ANDROID_SDK_LOCATION := android-sdk-linux
-
-ANDROID_NDK_VERSION := r9
-ANDROID_NDK_BZ2 := downloads/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.tar.bz2
-ANDROID_NDK_DOWNLOAD_LOCATION := http://dl.google.com/android/ndk/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.tar.bz2
-ANDROID_NDK_LOCATION := android-ndk-$(ANDROID_NDK_VERSION)
+ANDROID_NDK_VERSION := r10e
+ANDROID_NDK_ZIP := downloads/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.tar.bz2
+ANDROID_NDK_DOWNLOAD_LOCATION := https://dl.google.com/android/repository/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.zip
+ANDROID_NDK_LOCATION := android-ndk
 
 define EXPECT_SCRIPT
 set timeout -1                                                  \n\
@@ -41,28 +40,28 @@ extract_sdk : $(ANDROID_SDK_LOCATION)/.extracted
 
 $(ANDROID_SDK_LOCATION)/.extracted : download_sdk
 	@echo Extracting Android SDK
-	@tar zxf $(ANDROID_SDK_TGZ)
+	@unzip $(ANDROID_SDK_ZIP)
 	touch $@
 
 extract_ndk : $(ANDROID_NDK_LOCATION)/.extracted
 
 $(ANDROID_NDK_LOCATION)/.extracted : download_ndk
 	@echo Extracting Android SDK
-	@tar jxf $(ANDROID_NDK_BZ2)
+	@unzip $(ANDROID_NDK_ZIP)
 	touch $@
 
 download : download_sdk download_ndk
 
-download_sdk : $(ANDROID_SDK_TGZ)
+download_sdk : $(ANDROID_SDK_ZIP)
 
-download_ndk : $(ANDROID_NDK_BZ2)
+download_ndk : $(ANDROID_NDK_ZIP)
 
-$(ANDROID_SDK_TGZ) : downloads/.sentinel
+$(ANDROID_SDK_ZIP) : downloads/.sentinel
 	@echo Downloading Android SDK
 	@wget -nv -O $@ $(ANDROID_SDK_DOWNLOAD_LOCATION)
 	@touch $@
 
-$(ANDROID_NDK_BZ2) : downloads/.sentinel
+$(ANDROID_NDK_ZIP) : downloads/.sentinel
 	@echo Downloading Android NDK
 	@wget -nv -O $@ $(ANDROID_NDK_DOWNLOAD_LOCATION)
 	@touch $@
