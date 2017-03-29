@@ -17,7 +17,7 @@ ANDROID_NDK_LOCATION := android-ndk
 define EXPECT_SCRIPT
 set timeout -1                                                  \n\
                                                                 \n\
-spawn android-sdk-linux/tools/android update sdk --no-ui        \n\
+spawn $(ANDROID_SDK_LOCATION)/tools/android update sdk --no-ui  \n\
                                                                 \n\
 expect {                                                        \n\
     \"\[y\\/n\]: \" {                                           \n\
