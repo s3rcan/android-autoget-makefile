@@ -17,7 +17,7 @@ ANDROID_NDK_LOCATION := android-ndk
 define EXPECT_SCRIPT
 set timeout -1                                                   \n\
                                                                  \n\
-spawn $(ANDROID_SDK_LOCATION)/tools/android update sdk -u -a -t  android-23,android-11,platform-tools,build-tools-25.0.2,addon-google_apis-google-23,extra-android-m2repository,extra-google-m2repository \n\
+spawn $(ANDROID_SDK_LOCATION)/tools/android update sdk -u -a -t  android-23,android-10,platform-tools,build-tools-25.0.2,addon-google_apis-google-23,extra-android-m2repository,extra-google-m2repository \n\
 expect {                                                         \n\
     \"\[y\\/n\]: \" {                                            \n\
         send \"y\\\r\"                                           \n\
