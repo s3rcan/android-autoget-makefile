@@ -12,7 +12,7 @@ ANDROID_SDK_LOCATION := android-sdk
 ANDROID_NDK_VERSION := r10e
 ANDROID_NDK_ZIP := downloads/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.zip
 ANDROID_NDK_DOWNLOAD_LOCATION := https://dl.google.com/android/repository/android-ndk-$(ANDROID_NDK_VERSION)-linux-x86_64.zip
-ANDROID_NDK_LOCATION := android-ndk
+ANDROID_NDK_LOCATION := android-ndk-$(ANDROID_NDK_VERSION)
 
 define EXPECT_SCRIPT
 set timeout -1                                                   \n\
