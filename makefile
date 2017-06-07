@@ -41,7 +41,7 @@ extract_sdk : $(ANDROID_SDK_LOCATION)/.extracted
 
 $(ANDROID_SDK_LOCATION)/.extracted : download_sdk
 	@echo Extracting Android SDK
-	@unzip $(ANDROID_SDK_ZIP) -d $(ANDROID_SDK_LOCATION)
+	@unzip -q $(ANDROID_SDK_ZIP) -d $(ANDROID_SDK_LOCATION)
 	touch $@
 
 extract_ndk : $(ANDROID_NDK_LOCATION)/.extracted
